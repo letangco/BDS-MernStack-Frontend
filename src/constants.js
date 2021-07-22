@@ -1,0 +1,1 @@
+export const DEFAULT_URI_SLIDE = 'https://firebasestorage.googleapis.com/v0/b/uploadimagerealestate.appspot.com/o/images%2Fkinh-doanh-bat-dong-san-tu-tay-trang-khong-can-von-lieu-co-kho.jpg?alt=media&token=f92ce9a1-4994-4bb9-8b0f-0c19b387f894';

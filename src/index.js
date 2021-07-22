@@ -7,11 +7,14 @@ import './vendor/bootstrap/css/bootstrap.min.css';
 import './vendor/icons/css/materialdesignicons.min.css';
 import './vendor/select2/css/select2-bootstrap.css';
 import './vendor/select2/css/select2.min.css';
+// import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  // <BrowserRouter>
+    <App />,
+  // </BrowserRouter>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
