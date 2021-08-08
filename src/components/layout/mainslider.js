@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from "react";
-import LocationFilter from './location.filter';
+import LocationFilter from './filter/location.filter';
+import CategoryFilter from './filter/category.filter';
+import TypeProductFilter from './filter/typeProduct.filter';
 import sliderApi from "../../api/sliderApi";
+import PriceFilter from './filter/price.filter';
+import SquareFilter from "./filter/square.filter";
+import productApi from "../../api/productApi";
 
-function MainSlider() {
+function MainSlider(props) {
   const [slides, setSlide] = useState({});
   const [active, setActive] = useState(0);
+
+  const [typeProduct, setTypeProduct] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [square, setSquare] = useState(null);
+
+  const [queryCondition, setQueryCondition] = useState({});
 
   // const main_slide = useRef(null);
   const fetchApiFunc = async () => {
@@ -18,7 +31,8 @@ function MainSlider() {
 
   useEffect(() => {
     fetchApiFunc();
-  }, []);
+    props.changeFilter(queryCondition);
+  }, [queryCondition]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,6 +53,42 @@ function MainSlider() {
     if (active - 1 < 0) {
       setActive(slides.length - 1);
     } else setActive(active - 1);
+  }
+
+  // Callback from child component
+  const handleChangeType = (id) => {
+    setTypeProduct(id);
+    const temp ={ ...queryCondition, type: id };
+    setQueryCondition(temp);
+  };
+  // handle data change location
+  const handleChangeLocation = (data) => {
+    setLocation(data);
+    const temp = { ...queryCondition, ward: data };
+    setQueryCondition(temp);
+  }
+  // handle change category
+  const handleChangeCategory = (data) => {
+    setCategory(data);
+    const temp = { ...queryCondition, category: data };
+    setQueryCondition(temp);
+  }
+  // handle change price
+  const handleChangePrice = (price) => {
+    setPrice(price);
+    const temp = { ...queryCondition, price: price };
+    setQueryCondition(temp);
+  }
+  // handle change square
+  const handleChangeSquare = (square) => {
+    setSquare(square);
+    const temp = { ...queryCondition, square: square };
+    setQueryCondition(temp);
+  }
+  
+  async function onSearch(event) {
+    event.preventDefault();
+    props.onSearch();
   }
   return (
     <section className="osahan-slider">
@@ -69,101 +119,28 @@ function MainSlider() {
       </div>
       <div className="slider-form">
         <div className="container">
-          <h2 className="text-left mb-5">Find Your Dream Home</h2>
-          <form>
-            <ul className="nav nav-tabs" role="tablist">
-              <li className="nav-item">
-                <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">For Sale</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">For Rent</a>
-              </li>
-            </ul>
+          <h2 className="text-center mb-5">Find Your Dream Home</h2>
+          <form onSubmit={onSearch}>
+            <TypeProductFilter changeType = {handleChangeType} />
             <div className="tab-content">
               <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div className="row no-gutters">
                   <div className="col-md-3">
-                    <LocationFilter />
+                    <LocationFilter changeLocation = {handleChangeLocation} />
                   </div>
                   <div className="col-md-3">
-                    <div className="input-group">
-                      <div className="input-group-addon"><i className="mdi mdi-security-home" /></div>
-                      <select className="form-control select2 no-radius">
-                        <option value>Property Type</option>
-                        <option value>House/Villa</option>
-                        <option value>Flat</option>
-                        <option value>Plot/Land</option>
-                        <option value>Office Space</option>
-                        <option value>Shop/Showroom</option>
-                        <option value>Commercial Land</option>
-                        <option value>Warehouse/ Godown</option>
-                        <option value>Industrial Building</option>
-                      </select>
-                    </div>
+                    <CategoryFilter changeCategory = { handleChangeCategory }/>
                   </div>
                   <div className="col-md-2">
-                    <div className="input-group">
-                      <div className="input-group-addon"><i className="mdi mdi-cash-usd" /></div>
-                      <select className="form-control select2 no-radius">
-                        <option value>Price</option>
-                        <option value>House/Villa</option>
-                        <option value>Flat</option>
-                        <option value>Plot/Land</option>
-                        <option value>Office Space</option>
-                        <option value>Shop/Showroom</option>
-                        <option value>Commercial Land</option>
-                        <option value>Warehouse/ Godown</option>
-                        <option value>Industrial Building</option>
-                      </select>
-                    </div>
+                    <PriceFilter changePrice = {handleChangePrice}/>
                   </div>
                   <div className="col-md-2">
-                    <div className="input-group">
-                      <div className="input-group-addon"><i className="mdi mdi-format-wrap-square" /></div>
-                      <select className="form-control select2 no-radius">
-                        <option value>Square</option>
-                        <option value>House/Villa</option>
-                        <option value>Flat</option>
-                        <option value>Plot/Land</option>
-                        <option value>Office Space</option>
-                        <option value>Shop/Showroom</option>
-                        <option value>Commercial Land</option>
-                        <option value>Warehouse/ Godown</option>
-                        <option value>Industrial Building</option>
-                      </select>
-                    </div>
+                    <SquareFilter changeSquare = {handleChangeSquare}/>
                   </div>
                   <div className="col-md-2">
-                    <button type="submit" className="btn btn-secondary btn-block no-radius font-weight-bold">SEARCH</button>
-                  </div>
-                </div>
-              </div>
-              <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <div className="row no-gutters">
-                  <div className="col-md-7">
-                    <div className="input-group">
-                      <div className="input-group-addon"><i className="mdi mdi-map-marker-multiple" /></div>
-                      <input className="form-control" placeholder="Enter Landmark, Location or Society" type="text" />
-                    </div>
-                  </div>
-                  <div className="col-md-3">
-                    <div className="input-group">
-                      <div className="input-group-addon"><i className="mdi mdi-security-home" /></div>
-                      <select className="form-control select2 no-radius">
-                        <option value>Property Type</option>
-                        <option value>House/Villa</option>
-                        <option value>Flat</option>
-                        <option value>Plot/Land</option>
-                        <option value>Office Space</option>
-                        <option value>Shop/Showroom</option>
-                        <option value>Commercial Land</option>
-                        <option value>Warehouse/ Godown</option>
-                        <option value>Industrial Building</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-2">
-                    <button type="submit" className="btn btn-secondary btn-block no-radius font-weight-bold">SEARCH</button>
+                    <button type="submit" className="btn btn-secondary btn-block no-radius font-weight-bold">
+                      SEARCH
+                    </button>
                   </div>
                 </div>
               </div>

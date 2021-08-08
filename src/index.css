@@ -60,7 +60,7 @@ a:hover {
 a,
 a:hover {
     text-decoration: none;
-    color: #304ffe;
+    /* color: #304ffe; */
 }
 
 a:focus {
@@ -109,6 +109,53 @@ textarea.form-control {
 
 .help-block li {
     color: red;
+}
+
+
+/* pagination */
+
+.product-pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.product-pagination ul li {
+    width: 40px;
+    height: 40px;
+    margin: 0px 1px;
+    border: 1px solid #f8f9fa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    font-weight: 500;
+    background-color: #fff!important;
+}
+
+.product-pagination ul li:hover {
+    background-color: #f2f2f2 !important;
+    border: 1px solid #fff;
+    transform: scale(1.1);
+}
+
+.product-pagination ul li a {
+    color: #6c757d;
+}
+
+.product-pagination ul .active {
+    background-color: #505050 !important;
+    border: 1px solid #2c2c2c;
+}
+
+.product-pagination ul .active:hover {
+    background-color: #505050 !important;
+    border: 1px solid #2c2c2c;
+}
+
+.product-pagination ul .active a {
+    color: #fff;
+    font-weight: bold;
 }
 
 .pagination .page-item.active .page-link {
@@ -1372,3 +1419,6 @@ nav.navbar .navbar-nav .nav-link {
 
 
 /* End Mobile Media */
+
+
+/* pagination */

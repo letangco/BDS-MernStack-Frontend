@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import stateApi from "../../api/stateApi";
+import stateApi from "../../../api/stateApi";
 
-function FilterLocation() {
+function FilterLocation(props) {
   const [locations, setLocation] = useState({});
 
   // const main_slide = useRef(null);
@@ -19,6 +19,11 @@ function FilterLocation() {
     fetchApiFunc();
   }, []);
 
+  function selectLocation(event) {
+    // console.log(event.target.value);
+    props.changeLocation(event.target.value);
+  }
+
   const eLocation = locations.length ? locations.map((item, index) => {
     return (
       <option value={item._id} key={index}>{item.name_with_type}</option>
@@ -28,8 +33,8 @@ function FilterLocation() {
   return (
     <div className="input-group">
       <div className="input-group-addon"><i className="mdi mdi-google-maps" /></div>
-      <select className="form-control select2 no-radius">
-        <option value>Locations</option>
+      <select className="form-control select2 no-radius" onChange={selectLocation}>
+        <option value='all'>Khu vực</option>
         {eLocation}
       </select>
     </div>

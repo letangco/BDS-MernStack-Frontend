@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import TopNavbar from './components/layout/topnavbar';
 import NavbarMenu from './components/layout/navbarmenu';
@@ -12,6 +12,24 @@ import Footer from './components/layout/footer';
 import CopyRight from './components/layout/copyright';
 
 function App() {
+
+  const [filterData, setFilterData] = useState({  });
+  const [dataSearch, setDataSearch] = useState(false);
+
+  const handleChangeFilter = (filter) => {
+    const temp = {};
+    for (const [key, value] of Object.entries(filter)) {
+      if (value.toString() !== 'all') {
+        temp[key] = value;
+      }
+    }
+    setFilterData(temp);
+  };
+
+  const handleOnSearch = () => {
+    setDataSearch(!dataSearch);
+  };
+
   return (
     <div className="App">
       <meta charSet="utf-8" />
@@ -33,8 +51,8 @@ function App() {
       {/* Component */}
       <TopNavbar />
       <NavbarMenu />
-      <MainSlider />
-      <ListProperties />
+      <MainSlider changeFilter = { handleChangeFilter } onSearch = {handleOnSearch}/>
+      <ListProperties dataFilter = {filterData} dataSearch={dataSearch}/>
       <PropertiesByCity />
       <TrustAgents />
       <Blog />

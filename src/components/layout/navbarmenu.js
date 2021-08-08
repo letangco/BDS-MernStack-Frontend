@@ -19,7 +19,6 @@ const NavbarMenu = (props) => {
   useEffect(() => {
     fetchApiFunc();
   }, []);
-  console.log(navbar)
 
   const elementNavbar = navbar.map((item, index) => (
     <li className="nav-item dropdown" key={index}>

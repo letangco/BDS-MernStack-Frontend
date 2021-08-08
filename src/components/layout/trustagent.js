@@ -16,7 +16,7 @@ function TrustAgents() {
           <div className="col-lg-4 col-md-4">
             <div className="agents-card text-center">
               <img className="img-fluid mb-4" src={ImgAgent1} alt="" />
-              <p className="mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</p>
+              <p className="mb-4">Thông tin sản phẩm chính xác, tin cậy, nội dung hiển thị đầy đủ, xứng đáng cho các nhà đầu tư thông minh.</p>
               <h6 className="mb-0 text-primary">- Stave Martin
                 <span className="star-rating">
                   <i className="mdi mdi-star text-warning" />
@@ -32,7 +32,7 @@ function TrustAgents() {
           <div className="col-lg-4 col-md-4">
             <div className="agents-card text-center">
               <img className="img-fluid mb-4" src={ImgAgent2} alt="" />
-              <p className="mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</p>
+              <p className="mb-4">Tiết kiệm tối đa trong việc tìm kiếm thông tin liên quan đến các dự án bất động sản và giá thành nhà đất chi tiết.</p>
               <h6 className="mb-0 text-primary">- Mark Smith
                 <span className="star-rating">
                   <i className="mdi mdi-star text-warning" />
@@ -48,7 +48,7 @@ function TrustAgents() {
           <div className="col-lg-4 col-md-4">
             <div className="agents-card text-center">
               <img className="img-fluid mb-4" src={ImgAgent3} alt="" />
-              <p className="mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</p>
+              <p className="mb-4">Dễ sử dụng, thông tin chính xác, đảm bảo. Chuyên viên giao dịch nhanh chóng, uy tín.</p>
               <h6 className="mb-0 text-primary">- Ryan Printz
                 <span className="star-rating">
                   <i className="mdi mdi-star text-warning" />
